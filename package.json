@@ -11,7 +11,7 @@
     "dev:mfe1": "cd mfe-portal-participante && ng serve --port 4200",
     "dev:mfe2": "cd mfe-painel-organizador && ng serve --port 4201",
     "dev:svc1": "cd svc-usuarios && pnpm run start:dev",
-    "dev:svc2:win": "cd svc-eventos && .\\.venv\\Scripts\\activate.bat && uvicorn app.main:app --reload --port 8000 --host localhost",
+    "dev:svc2:win": "cross-env PYTHONPATH=svc-eventos .\\svc-eventos\\.venv\\Scripts\\uvicorn.exe app.main:app --reload --port 8000 --host localhost",
     "dev:svc2:unix": "cd svc-eventos && . .venv/Scripts/activate && uvicorn app.main:app --reload --port 8000 --host localhost",
     "dev:svc3": "cd svc-pedidos && pnpm run start:dev"
   },
@@ -27,5 +27,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "cross-env": "^10.1.0"
   }
 }
