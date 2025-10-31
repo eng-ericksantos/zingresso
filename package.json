@@ -1,0 +1,31 @@
+{
+  "name": "zingresso",
+  "version": "1.0.0",
+  "description": "Monorepo do projeto Zingresso (TCC) com Micro Front-ends (Angular) e Microsserviços (NestJS, FastAPI)",
+  "private": true,
+  "scripts": {
+    "__comment__": "Use 'pnpm run start:dev:win' no Windows ou 'pnpm run start:dev:unix' no macOS/Linux/GitBash",
+    "start:infra": "docker-compose up -d",
+    "start:dev:win": "concurrently --names \"PORTAL(4200),PAINEL(4201),USUARIOS(3000),EVENTOS(8000),PEDIDOS(3001)\" --prefix-colors \"blue.bold,magenta.bold,green.bold,yellow.bold,cyan.bold\" \"pnpm:dev:mfe1\" \"pnpm:dev:mfe2\" \"pnpm:dev:svc1\" \"pnpm:dev:svc2:win\" \"pnpm:dev:svc3\"",
+    "start:dev:unix": "concurrently --names \"PORTAL(4200),PAINEL(4201),USUARIOS(3000),EVENTOS(8000),PEDIDOS(3001)\" --prefix-colors \"blue.bold,magenta.bold,green.bold,yellow.bold,cyan.bold\" \"pnpm:dev:mfe1\" \"pnpm:dev:mfe2\" \"pnpm:dev:svc1\" \"pnpm:dev:svc2:unix\" \"pnpm:dev:svc3\"",
+    "dev:mfe1": "cd mfe-portal-participante && ng serve --port 4200",
+    "dev:mfe2": "cd mfe-painel-organizador && ng serve --port 4201",
+    "dev:svc1": "cd svc-usuarios && pnpm run start:dev",
+    "dev:svc2:win": "cd svc-eventos && .\\.venv\\Scripts\\activate.bat && uvicorn app.main:app --reload --port 8000 --host localhost",
+    "dev:svc2:unix": "cd svc-eventos && . .venv/Scripts/activate && uvicorn app.main:app --reload --port 8000 --host localhost",
+    "dev:svc3": "cd svc-pedidos && pnpm run start:dev"
+  },
+  "keywords": [
+    "monorepo",
+    "angular",
+    "nestjs",
+    "fastapi",
+    "microservices",
+    "micro-frontends"
+  ],
+  "author": "Erick Alessandro dos Santos",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

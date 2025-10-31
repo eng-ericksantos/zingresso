@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # 1. Banco de Dados Relacional (Usuários, Pedidos)
+  postgres-db:
+    image: postgres:15
+    container_name: zingresso-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: zingresso_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - zingresso-pgdata:/var/lib/postgresql/data
+    networks:
+      - zingresso-network
+
+  # 2. Banco de Dados NoSQL (Eventos)
+  mongo-db:
+    image: mongo:6.0
+    container_name: zingresso-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - zingresso-mongodata:/data/db
+    networks:
+      - zingresso-network
+
+  # 3. Fila de Mensagens (Comunicação Assíncrona)
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: zingresso-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      # Porta do protocolo AMQP
+      - '5672:5672'
+      # Porta da Interface Gráfica de Gerenciamento (Acesse em http://localhost:15672)
+      - '15672:15672'
+    networks:
+      - zingresso-network
+
+volumes:
+  zingresso-pgdata:
+  zingresso-mongodata:
+
+networks:
+  zingresso-network:
+    driver: bridge

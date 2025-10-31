@@ -1,0 +1,5 @@
+packages:
+  # Inclui todos os projetos que começam com 'mfe-'
+  - 'mfe-*'
+  # Inclui todos os projetos que começam com 'svc-'
+  - 'svc-*'

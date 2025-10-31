@@ -1,0 +1,35 @@
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Logs e Dependências
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lockfiles (pode-se manter, mas em monorepo é comum ignorar)
+package-lock.json
+yarn.lock
+
+# Pastas de Build e Cache
+dist/
+build/
+.angular/
+.cache/
+
+# Arquivos de IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Docker (Dados locais persistentes)
+pgdata/
+mongodata/

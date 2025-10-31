@@ -1,0 +1,5 @@
+# Framework da API
+fastapi==0.111.0
+
+# Servidor ASGI para rodar o FastAPI
+uvicorn[standard]==0.29.0
